@@ -1,0 +1,9 @@
+speechrecognition/data
+speechrecognition/misc
+speechrecognition/.vscode
+speechrecognition/.git
+speechrecognition/.ipynb_checkpoints
+speechrecognition/__pycache__
+speechrecognition/workspace.code-workspace
+speechrecognition/.gitignore
+
