@@ -15,8 +15,8 @@
 
 \begin{document}
 
-\title{Artificial intelligence in physics teacher education}
-\translatedtitle{Tekoäly fysiikan opettajakoulutuksessa}
+\title{Automatic speech recognition in physics teacher education}
+\translatedtitle{Automaattinen puheentunnistus fysiikan opettajakoulutuksessa}
 \studyline{Educational Technology}
 \avainsanat{%
   TODO: Avainsanat}
@@ -56,38 +56,6 @@ In natural language processing the creation of treebanks such as Turku Dependenc
 
 Manually transcribing and preprocessing lessons from audio data for analysis is a very laborious task. The aim of this study is to develop a pipeline for studying physics lesson content structures and relationships between physics concepts with conceptual network analysis using automatic speech recognition and natural language processing. This is done to provide a new tool for analysing physics instruction for research and teacher education purposes. 
 
-\chapter{Artificial intelligence}
-TODO: AI overview, AI history, ASR and NLP concepts
-
-\section{Automatic speech recognition}
-Automatic speech recognition (ASR), sometimes called speech to text, is a classification task, where the goal is to predict what was said from the audio signal of speech. Early ASR systems had an acoustic model which detected different sounds also known as phonemes to recognize numbers, some vowels and consonants for a single speaker \parencite{juang2005automatic}. The later addition of a language model based on statistical grammar or syntax helped to predict the correct word based on what words previously appeared in the sentence \parencite{juang2005automatic}. Modern ASR systems utilize the fact that sentences are sequences of words and words are sequences of phonemes \parencite{bengio2014word}. This is a difficult machine learning task because of a large search space, large vocabulary, undetermined length of word sequences and problems related to aligning speech signal to the text \parencite{enarvi2018modeling}.
-
-Speech is highly variable even with a single speaker due to noise, but different pronounciations and accents mean that the audio signal will be different despite the same words being spoken \parencite{juang2005automatic}. 
-
-\subsection{Speech to Text}
-TODO: Different approaches
-
-\subsection{Finnish speech data}
-TODO: Conversational vs official Finnish
-
-\subsection{Comparisons}
-TODO: Defining "good", comparing literature results, running own tests
-
-\section{Natural language processing}
-TODO: NLP overview \parencite{silfverberg2016finnpos, kanerva2018turku}
-
-\subsection{Word embedding}
-TODO: word2vec
-
-\subsection{Lemmatization and stemming}
-TODO: Snowball vs TurkuNLP lemmatization
-
-\subsection{Finnish NLP data}
-TODO: Data from different sources, treebanks for parsing vs. word lists/text
-
-\subsection{Comparisons}
-TODO: Evaluating the stemming and lemmatization (error rate), evaluating similarities (edit distance, word2vec), literature and own tests
-
 \chapter{Physics instruction quality}
 TODO: Paragraph about science education and physics education history
 TODO: Paragraph about the change of science and physics education and modern physics education
@@ -103,26 +71,49 @@ TODO: Paragraph about pedagogical link making
 
 \section{Pedagogical link making}
 TODO: \parencite{scott2011pedagogical}
+
 \section{Conceptual network analysis}
 TODO: \parencite{mclinden2013concept,fischer2014quality, vargas}
 
+\chapter{Speech as data}
+TODO: AI overview, AI history, ASR and NLP concepts
 
+\section{Automatic speech recognition}
+Automatic speech recognition (ASR), sometimes called speech to text, is a classification task, where the goal is to predict what was said from the audio signal of speech. Early ASR systems had an acoustic model which detected different sounds also known as phonemes to recognize numbers, some vowels and consonants for a single speaker \parencite{juang2005automatic}. The later addition of a language model based on statistical grammar or syntax helped to predict the correct word based on what words previously appeared in the sentence \parencite{juang2005automatic}. Modern ASR systems utilize the fact that sentences are sequences of words and words are sequences of phonemes \parencite{bengio2014word}. This is a difficult machine learning task because of a large search space, large vocabulary, undetermined length of word sequences and problems related to aligning speech signal to the text \parencite{enarvi2018modeling}.
 
-\section{Methods and materials}
+Speech is highly variable even with a single speaker due to noise, but different pronounciations and accents mean that the audio signal will be different despite the same words being spoken \parencite{juang2005automatic}. 
+
+\subsection{Finnish speech data}
+TODO: Conversational vs official Finnish
+
+\section{Natural language processing}
+TODO: NLP overview \parencite{silfverberg2016finnpos, kanerva2018turku}
+
+\subsection{Word embedding}
+TODO: word2vec
+
+\subsection{Lemmatization and stemming}
+TODO: Snowball vs TurkuNLP lemmatization
+
+\subsection{Finnish NLP data}
+TODO: Data from different sources, treebanks for parsing vs. word lists/text
+
+\chapter{Methods}
 
 %https://www.kdnuggets.com/2019/08/neighbours-machine-learning-graphs.html
-\subsection{Data}
+\section{Data}
   TODO: \parencite{fischer2014quality}
-\subsection{Speech-to-text}
+\section{Automatic speech recognition}
   TODO: \parencite{enarvi2018modeling}
-\subsection{Lemmatization and stemming}
+\section{Lemmatization and stemming}
   TODO: TurkuNLP \parencite{kanerva2018turku}
   TODO: libvoikko https://github.com/voikko/corevoikko/tree/master/libvoikko
   TODO: FinnPOS \parencite{silfverberg2016finnpos}
-\subsection{Word frequency}
-\subsection{Network analysis}
+\section{Word frequency}
+\section{Network analysis}
 Social network analysis has been used in physics education research for example to study student collaboration \parencite{vargas2018correlation}, interactions within student communities \parencite{brewe2012investigating} 
 
+\chapter{Results}
 
 TODO:
 \chapter{Conclusions}
