@@ -60,7 +60,9 @@ Manually transcribing and preprocessing lessons from audio data for analysis is 
 TODO: AI overview, AI history, ASR and NLP concepts
 
 \section{Automatic speech recognition}
-TODO: ASR overview \parencite{spille2018comparing, enarvi2018modeling} 
+Automatic speech recognition (ASR), sometimes called speech to text, is a classification task, where the goal is to predict what was said from the audio signal of speech. Early ASR systems had an acoustic model which detected different sounds also known as phonemes to recognize numbers, some vowels and consonants for a single speaker \parencite{juang2005automatic}. The later addition of a language model based on statistical grammar or syntax helped to predict the correct word based on what words previously appeared in the sentence \parencite{juang2005automatic}. Modern ASR systems utilize the fact that sentences are sequences of words and words are sequences of phonemes \parencite{bengio2014word}. This is a difficult machine learning task because of a large search space, large vocabulary, undetermined length of word sequences and problems related to aligning speech signal to the text \parencite{enarvi2018modeling}.
+
+Speech is highly variable even with a single speaker due to noise, but different pronounciations and accents mean that the audio signal will be different despite the same words being spoken \parencite{juang2005automatic}. 
 
 \subsection{Speech to Text}
 TODO: Different approaches
@@ -86,8 +88,18 @@ TODO: Data from different sources, treebanks for parsing vs. word lists/text
 \subsection{Comparisons}
 TODO: Evaluating the stemming and lemmatization (error rate), evaluating similarities (edit distance, word2vec), literature and own tests
 
-\chapter{Physics instruction analysis}
-TODO: Physics education \parencite{wieman2005transforming, fischer2014quality}
+\chapter{Physics instruction quality}
+TODO: Paragraph about science education and physics education history
+TODO: Paragraph about the change of science and physics education and modern physics education
+TODO: Paragraph about educational material and pedagogical tools
+TODO: Paragraph about physiscs instruction
+
+TODO: Paragraph about cognitive structure and content structure
+TODO: Paragraph about how cognitive structure fits with education (geeslin, shavelson)
+TODO: Paragraph about linking cognitive structure of students and teachers
+TODO: Paragraph about content structure with written text with content structure (geeslin, shavelson, wieman)
+
+TODO: Paragraph about pedagogical link making
 
 \section{Pedagogical link making}
 TODO: \parencite{scott2011pedagogical}
@@ -97,6 +109,8 @@ TODO: \parencite{mclinden2013concept,fischer2014quality, vargas}
 
 
 \section{Methods and materials}
+
+%https://www.kdnuggets.com/2019/08/neighbours-machine-learning-graphs.html
 \subsection{Data}
   TODO: \parencite{fischer2014quality}
 \subsection{Speech-to-text}
@@ -107,7 +121,7 @@ TODO: \parencite{mclinden2013concept,fischer2014quality, vargas}
   TODO: FinnPOS \parencite{silfverberg2016finnpos}
 \subsection{Word frequency}
 \subsection{Network analysis}
-
+Social network analysis has been used in physics education research for example to study student collaboration \parencite{vargas2018correlation}, interactions within student communities \parencite{brewe2012investigating} 
 
 
 TODO:
