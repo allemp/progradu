@@ -1,5 +1,6 @@
 #%%
 # importing libraries
+
 #%%
 # Load data from T1-T27 transcription files
 def load_transcripts():
@@ -61,3 +62,11 @@ def load_test_keywords():
     except:
         print("File " + keywords_path + " failed")
     return keywords
+
+#%%
+# Load learning gain
+def load_learning_gain():
+    import pandas as pd
+    return pd.read_csv("data/learning_gain.csv")
+
+#%%

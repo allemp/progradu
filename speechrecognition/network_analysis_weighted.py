@@ -4,11 +4,18 @@ import pandas as pd
 import numpy as np
 import networkx as nx
 import matplotlib.pyplot as plt
-from load_asr_data import load_keywords, load_transcripts, load_test_transcript
+from load_asr_data import load_keywords, load_transcripts, load_test_transcript, load_learning_gain
 import itertools as it
 from nltk.stem.snowball import SnowballStemmer
 from rpy2.robjects.packages import importr
 from rpy2.robjects import pandas2ri
+
+from sklearn import linear_model
+
+# Installing tnet for R
+# from rpy2.robjects.packages import importr
+# utils = importr('utils')
+ #utils.install_packages('tnet')
 
 
 #%%
@@ -93,9 +100,11 @@ keywords_closeness_normalized = [word + "_closeness_normalized" for word in occu
 #%%
 # Calculate weighted degree, betweenness and closeness for each teacher for each keyword
 teacher_measures_list = []
+teacher_weighted_edges = []
 
 for transcript in transcripts:
     weighted_edges = count_edges(get_edges(stem_transcript(transcript), keywords_stemmed))
+    teacher_weighted_edges.append(weighted_edges)
 
     tnet_df = pd.DataFrame(sum([edge_to_tnet(edge) for edge in weighted_edges],[]))
     tnet_df["from"] = tnet_df["from"].astype("category")
@@ -126,20 +135,29 @@ for transcript in transcripts:
 
 #%%
 data = pd.DataFrame(teacher_measures_list)
-data
+learning_gain = load_learning_gain()
 
 #%%
+reg = linear_model.Lasso(alpha = 0.1)
+reg = reg.fit(data, learning_gain["learning_gain"])
+reg.score(data,learning_gain["learning_gain"])
+reg.coef_
+#%%
 # Create graph
-#G = nx.Graph()
-#G.add_weighted_edges_from(weighted_edges)
-#
-#weights = [G[u][v]['weight'] for u,v in edges]
-#
-#old_min = min(weights)
-#old_range = max(weights) - old_min
-#new_min = 1
-#new_range = 5 + 0.9999999999 - new_min
-#normalized_weights = [int((n - old_min) / old_range * new_range + new_min) for n in weights]
-#
-#nx.draw(G, with_labels = True, width = normalized_weights)
-#plt.draw()
+
+teacher = 20
+G = nx.Graph()
+G.add_weighted_edges_from(teacher_weighted_edges[teacher])
+
+weights = [w for u,v,w in teacher_weighted_edges[teacher]]
+
+old_min = min(weights)
+old_range = max(weights) - old_min
+new_min = 1
+new_range = 5 + 0.9999999999 - new_min
+normalized_weights = [int((n - old_min) / old_range * new_range + new_min) for n in weights]
+
+nx.draw(G, with_labels = True, width = normalized_weights)
+plt.draw()
+
+#%%
