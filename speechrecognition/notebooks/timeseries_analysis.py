@@ -1,9 +1,7 @@
 #%% Importing libraries
 import pandas as pd
 import numpy as np
-from nltk.stem.snowball import SnowballStemmer
-
-from load_asr_data import load_keywords, load_transcripts, load_test_transcript
+import json
 
 #%% Load transcripts and keywords
 stemmer = SnowballStemmer("finnish")
