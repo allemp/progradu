@@ -1,0 +1,12 @@
+digraph P {
+  rankdir="LR";
+  
+  "Classroom video" -> "Transcript"
+  "Classroom video" -> "Meaningful representation"
+  "Transcript" -> "Meaningful representation"
+  "Meaningful representation" -> "Visualization"
+  "Meaningful representation" -> "Interpretation"
+  "Visualization" -> "Interpretation"
+
+
+}

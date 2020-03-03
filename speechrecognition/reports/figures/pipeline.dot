@@ -1,0 +1,7 @@
+digraph P {
+
+  "Automatic speech recognition" -> "Text processing" -> "Feature engineering" -> "Machine learning" -> "Model validation" -> {"Interpretation", "Visualization"}
+
+  "Feature engineering" -> "Visualization" -> "Interpretation"
+
+}

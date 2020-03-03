@@ -1,0 +1,11 @@
+digraph P {
+
+  
+  "Speech data" -> "Acoustic features" -> "Decoder"
+
+  "Acoustic model" -> "Decoder"
+  "Language model" -> "Decoder"
+  "Lecixon" -> "Decoder"
+
+  "Decoder" -> "Text data"
+}

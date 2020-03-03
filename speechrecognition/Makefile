@@ -1,9 +1,25 @@
-CUR_DIR = $(CURDIR)
+P=python3
+KWPATH=data/raw/keywords/master_keywords_unstemmed.txt
+TRPATH=data/raw/transcripts
+TSPATH=data/raw/test_results/CKPT_1dim_mit_Anker.sav
+graphs := $(patsubst reports/figures/%.dot,reports/figures/%.png,$(wildcard reports/figures/*.dot))
 
-all: build_docker create_dataset
+all: data/interim/keywords_stemmed.json data/interim/keywords_voikko.json data/interim/transcripts_voikko.json data/interim/transcripts_stemmed.json data/interim/test_scores.csv $(graphs)
 
-build_docker:
-	docker build . -t speechrecognition
+data/interim/keywords_stemmed.json: physicsasr/dataset/create_dataset.py
+	$(P) $^ --path=$(KWPATH) --type=keywords --baseformer=nltk > $@
 
-create_dataset:
-	docker run -it -v $(CURDIR):/speechrecognition/ speechrecognition python3 src/dataset/create_dataset.py
+data/interim/keywords_voikko.json: physicsasr/dataset/create_dataset.py
+	$(P) $^ --path=$(KWPATH) --type=keywords --baseformer=voikko > $@
+
+data/interim/transcripts_voikko.json: physicsasr/dataset/create_dataset.py
+	$(P) $^ --path=$(TRPATH) --type=transcripts --baseformer=voikko > $@
+
+data/interim/transcripts_stemmed.json: physicsasr/dataset/create_dataset.py
+	$(P) $^ --path=$(TRPATH) --type=transcripts --baseformer=nltk > $@
+
+data/interim/test_scores.csv: physicsasr/dataset/create_test_scores.R
+	Rscript --vanilla $^ $(TSPATH) $@
+
+reports/figures/%.png: reports/figures/%.dot
+	dot $< -Tpng -o $@

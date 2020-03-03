@@ -1,0 +1,9 @@
+nltk
+numpy
+coverage
+pytest
+jupyter
+pandas
+pylint
+matplotlib
+matrixprofile-ts
