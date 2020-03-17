@@ -2,7 +2,8 @@
 import pandas as pd
 import numpy as np
 import json
-from matrixprofile import *
+#from matrixprofile import *
+import stumpy
 
 #%% Counting occurances of a keyword in a list of words
 def keyword_counter(words, keywords):
@@ -25,23 +26,34 @@ def transcript_keyword_freq(transcript, keywords, window_size):
 
 #%% Compute a matrix profile
 def matrix_profile(keyword_freq, m):
-    return matrixProfile.stomp(np.asarray(keyword_freq), m)
+    print(stumpy.stump(np.asarray(keyword_freq, dtype=np.double), m=m))
+    return stumpy.stump(np.asarray(keyword_freq, dtype=np.double), m=m)
 
-#%% Compute an adjusted matrix profile
+
+#%% Compute an adjusted matrix profile from a matrix profile
 def matrix_profile_adjusted(mp, m):
-    return np.append(mp[0], np.zeros(m-1)+np.nan)
+    return np.append(mp[:,0], np.zeros(m-1)+np.nan)
 
-#%% 
-if __name__ == "__main__":
-    keywords_path = "../../data/interim/keywords_voikko.json"
-    transcripts_path = "../../data/interim/transcripts_voikko.json"
+#%% Compute a corrected arc curve (CAC) using Fluss algorithm from a matrix profile
+def cac_fluss(mp, L, n_regimes):
+    return stumpy.fluss(mp[: , 1], L = L, n_regimes = n_regimes, excl_factor = 1)
 
-    with open(keywords_path, "r") as f:
-        keywords = json.load(f)
-    with open(transcripts_path, "r") as f:
-        transcripts = json.load(f)
+#%% Features class to obtain the keyword frequencies and matrix profiles
+class Features:
 
-# %%
+    def __init__(self, transcript, keywords):
+        self.transcript = transcript
+        self.keywords = keywords
 
+    def compute_transcript_mp(self, window_size, mp_window):
+        return matrix_profile_adjusted(matrix_profile(
+            transcript_keyword_freq(self.transcript,self.keywords,window_size),
+            mp_window),mp_window)
 
-# %%
+    def compute_keyword_freq(self, window_size):
+        return transcript_keyword_freq(self.transcript, self.keywords, window_size)
+
+    def compute_cac(self, window_size, mp_window, L, n_regimes):
+        return cac_fluss(matrix_profile(
+            transcript_keyword_freq(self.transcript,self.keywords,window_size),
+            mp_window), L, n_regimes)

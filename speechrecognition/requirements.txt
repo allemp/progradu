@@ -7,3 +7,4 @@ pandas
 pylint
 matplotlib
 matrixprofile-ts
+stumpy

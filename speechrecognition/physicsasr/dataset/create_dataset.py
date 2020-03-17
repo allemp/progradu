@@ -56,6 +56,15 @@ def create_keywordlist(lines, baseformer):
     keywords = baseformer(lines)
     return keywords
 
+
+#%% Dataset class that loads the interim data to use in other python code
+class Dataset:
+    def __init__(self, keywords_path, transcripts_path):
+        with open(keywords_path, "r") as f:
+            self.keywords = json.load(f)
+
+        with open(transcripts_path, "r") as f:
+            self.transcripts = json.load(f)
 #%% Write interim data to stdout when run from the command line
 
 if __name__ == "__main__":
