@@ -26,7 +26,6 @@ def transcript_keyword_freq(transcript, keywords, window_size):
 
 #%% Compute a matrix profile
 def matrix_profile(keyword_freq, m):
-    print(stumpy.stump(np.asarray(keyword_freq, dtype=np.double), m=m))
     return stumpy.stump(np.asarray(keyword_freq, dtype=np.double), m=m)
 
 
