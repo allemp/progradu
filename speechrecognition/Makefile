@@ -4,7 +4,9 @@ TRPATH=data/raw/transcripts
 TSPATH=data/raw/test_results/CKPT_1dim_mit_Anker.sav
 graphs := $(patsubst reports/figures/%.dot,reports/figures/%.png,$(wildcard reports/figures/*.dot))
 
-all: data/interim/keywords_stemmed.json data/interim/keywords_voikko.json data/interim/transcripts_voikko.json data/interim/transcripts_stemmed.json data/interim/test_scores.csv $(graphs)
+all: package
+
+temp: data/interim/keywords_stemmed.json data/interim/keywords_voikko.json data/interim/transcripts_voikko.json data/interim/transcripts_stemmed.json data/interim/test_scores.csv $(graphs)
 
 data/interim/keywords_stemmed.json: physicsasr/dataset/create_dataset.py
 	$(P) $^ --path=$(KWPATH) --type=keywords --baseformer=nltk > $@
@@ -23,3 +25,6 @@ data/interim/test_scores.csv: physicsasr/dataset/create_test_scores.R
 
 reports/figures/%.png: reports/figures/%.dot
 	dot $< -Tpng -o $@
+
+package: temp
+	pip3 install -e ./

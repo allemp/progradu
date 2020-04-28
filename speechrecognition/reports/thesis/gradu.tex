@@ -44,6 +44,7 @@
 \begin{thetermlist}
 \item[TODO] TODO: Glossary
 \item[ASR] Automatic Speech Recognition
+\item[KDD] Knowledge Discovery in Databases 
 \item[HMM] Hidden Markov Model
 \item[LSTM] Long Short-Term Memory 
 \item[ML] Machine Learning
@@ -59,39 +60,39 @@
 
 
 \chapter{Introduction}
-Automating the laborious and subjective process of analysing classroom speech data has potential for improving physics instruction quality and providing new tools for physics teacher education. Technological advancements in automatic speech recognition (ASR), natural language processing (NLP) and machine learning (ML) allow for more data driven approaches. The aim of this research is to develop techniques for automatic analysis of physics instruction quality.
 
-An important part of physics education is teaching students how to think like an expert and have deeper understanding of the physics concepts with monitoring and guidance of the instructor \parencite{wiemanTransformingPhysicsEducation2007}. Good physics instruction dependent on the talk between the teacher and the students \parencite{scottTeachingScienceMeaningful2007}. Unfortunately teacher talk is not given the attention it deserves during teacher education \parencite{crespoPraisingCorrectingProspective2002,lehesvuoriDialogicTeachingScience2013}, mostly because of lack of good methods to analyse the talk, which is often done with manual labelling or transcribing into text from video and audio data. Analysing teacher talk is discussed in more detail in \autoref{chap:quip}. This presents an opportunity for analysing teacher talk automatically using ASR and NLP methods.
+\emph{Automatic speech recognition (ASR)} has gained interest in fields such as education, that are outside of usual domains of linguistics or computer science. This interest is sparked because of the increasing amount of audio speech data gathered in research activities such as observation or interviews. While speech-to-text ASR has been available for some time, further analysis of the text data in has remained a manual process especially in the domain of education. An important part of physics education is teaching students how to think like an expert and have deeper understanding of the physics concepts with monitoring and guidance of the instructor \parencite{wiemanTransformingPhysicsEducation2007}. Good physics instruction depends on the talk between the teacher and the students, which is called \emph{teacher talk} \parencite{scottTeachingScienceMeaningful2007}. Unfortunately teacher talk is not given the attention it deserves during teacher education \parencite{crespoPraisingCorrectingProspective2002,lehesvuoriDialogicTeachingScience2013}. 
 
-Analysing speech data is particularly difficult due to the variation introduced by the differences between individual speakers, genders, emotional states, accents, dialects or due to casual speech slurring \parencite{benzeghibaAutomaticSpeechRecognition2007}. Analysis of the words and the meaning of the speech data will be highly dependent on the available corpus data and tools such as parsers, which were not available for Finnish until recently \parencite{haverinenNaturalLanguageProcessing2014, enarviModelingConversationalFinnish2018}. Automatic speech recognition and natural language processing is discussed in \autoref{chap:speech}.
+Speech as data is sequential and messy in nature and requires cleaning and preprocessing before it can be used. In the case of teacher talk, it is traditionally analysed manually by researchers, which is a subjective and laborious process that is difficult to reproduce. Lack of analysis methods for teacher talk have been identified and new methods to analyse and visualize teacher talk during a lesson have been developed over time \parencite{viiriTeacherTalkPatterns2006,lehesvuoriVisualizingCommunicationStructures2013}. However, these methods rely on researchers first manually transcribing and coding the data, which is still laborious and difficult to reproduce. This is impractical for both research and for use in the field to give teachers feedback during their teacher education. Speech-to-text ASR is a well researched topic with significant advances especially in languages without a lot of speakers such as Finnish \parencite{kurimoModelingUnderresourcedLanguages2017}. Further processing of the text data is domain and application specific and not well researched in the case of teacher talk in science education and is the topic of this thesis. 
 
-In this research we answer the research question "How can traditional NLP techniques and machine learning be used for analysing physics instruction quality?" using the knowledge discovery in databases (KDD) methodology with the following contributions:
+The problem is approached through a \emph{Knowledge Discovery in Databases (KDD)} process, which is an iterative process developed to extract valid, novel, potentially useful and understandable patterns from existing databases when manual data analysis is slow, expensive, highly subjective or otherwise impractical \parencite{fayyadKDDProcessExtracting1996}. KDD is a formal process that in addition to a \emph{data mining} step includes data preparation and interpretation and evaluation steps \parencite{fayyadKDDProcessExtracting1996}. This type of data analysis is exploratory in nature without assumptions and is used for automatic hypothesis generation, with emphasis on evaluation using quantitative measures \parencite{fayyadKDDProcessExtracting1996}.
 
-%--------------------------------------------------------------------------------
+The aim of this thesis is to automatically discover novel and potentially useful patterns in teacher talk using data mining methods. The scope is limited to data analysis after Finnish physics teacher talk is already processed into text by a text-to-speech ASR. This is a limitation, because any errors made by the ASR system will propagate into the rest of the analysis and is an interesting topic for further research.
+
+The outcomes of this thesis are two contributions in analysing teacher talk:
+
 \begin{itemize}
-  \item Comparing the quality of lemmatization using the morphological parser Voikko with stemming using the Snowball stemmer when applied to Finnish lesson transcripts in \autoref{sec:stemlem}.
-  \item Visualizing the lessons in a meaningful way using network analysis and comparing them using network measures in \autoref{sec:features}.
-  \item Engineering features to encode representations of the physics lesson transcripts for use in machine learning models in \autoref{sec:features}. 
-  \item Applying supervised and unsupervised machine learning techniques to gain insights of the instruction quality in \autoref{sec:supervised}.
-  \item Validation of models and comparison of performance in \autoref{sec:val}.
+  \item Automatic visualization of teacher talk using concept networks
+  \item TODO motif discovery
 \end{itemize}
-%--------------------------------------------------------------------------------
-
 
 %--------------------------------------------------------------------------------
 
 
-\chapter{Physics instruction quality}
+\chapter{Teacher talk in physics instruction quality}
 \label{chap:quip}
 
-The quality of physics instruction has been at the centre of discussion, where traditional teaching methods have been criticized as inefficient at creating experts capable of thinking like physicists \parencite{wiemanTransformingPhysicsEducation2007}. The interaction between the teacher and the students is called \emph{teacher talk} and is a big part of all physics lessons, which is often taken for granted \parencite{scottTeachingScienceMeaningful2007}. Teacher talk is often not sufficiently addressed during teacher education and could be explained by the scarcity of available methods \parencite{lehesvuoriDialogicTeachingScience2013,viiriTeacherTalkPatterns2006, crespoPraisingCorrectingProspective2002}. This chapter will review the types of methods typically used to analyse teacher talk.
+\section{Teacher talk}
+The quality of physics instruction has been at the centre of discussion, where traditional teaching methods have been criticized as inefficient at creating experts capable of thinking like physicists \parencite{wiemanTransformingPhysicsEducation2007}. The interaction between the teacher and the students is called \emph{teacher talk} and is a big part of all physics lessons, which is often taken for granted \parencite{scottTeachingScienceMeaningful2007}. Teacher talk is often not sufficiently addressed during teacher education and could be explained by the scarcity of available methods \parencite{lehesvuoriDialogicTeachingScience2013,viiriTeacherTalkPatterns2006, crespoPraisingCorrectingProspective2002}.
 
+\section{Qualitative analysis of teacher talk}
 Qualitative observation, where a mentor teacher makes observations during the lesson and gives feedback to the student teacher after the lesson, is an easy and a natural way to analyse teacher talk. According to Viiri and Saari \parencite*{viiriTeacherTalkPatterns2006} student teachers have issues with remembering what happened during the lesson and both self-reflection and teacher tutor feedback are based on memory and are unstructured. Therefore they developed a method to analyse teacher talk by visualizing talk types such as "teacher presentation", "authoritative discussion", "dialogic discussion", "peer discussion" and "other" of the lesson. This was achieved by first videotaping the lesson, manually transcribing it and then manually coding each time window into one of the teacher talk types. Viiri and Saari \parencite*{viiriTeacherTalkPatterns2006} point out that \enquote{Discourse analysis necessarily proceeds on the basis of the investigator’s interpretations of what was said.} Even this newly developed method is qualitative and subjective in nature by necessity.
 
 This kind of qualitative and subjective analysis of teacher talk from classroom videos, usually by first transcribing or coding the talk based on some kind of a theoretical framework is not unique. For example Scott and Ametller \parencite*{scottTeachingScienceMeaningful2007} and Scott et al. \parencite*{scottPedagogicalLinkMaking2011} rely on small case studies and manual analysis of teacher talk from classroom video data either directly or from transcripts. The details of what they are looking for in the teacher talk is different in each case and dependent on the chosen theoretical framework, but the overall process is the same.
 
 Qualitative analysis of teacher talk is not necessarily a weakness. Lehesvuori \parencite*{lehesvuoriDialogicTeachingScience2013} used a mix of qualitative and quantitative methods in his PhD dissertation and notes that qualitative methods of analysing teacher talk have allowed for more flexibility in contrast with quantitative methods, which were limited by the scarcity of dialogic interactions during the lessons. He identifies a weakness with quantitative methods of analysing teacher talk, which typically do not take into account the temporal aspect of teacher talk continuously changing during the lesson. Lehesvuori \parencite*{lehesvuoriVisualizingCommunicationStructures2013} also developed a method to visualize the teacher talk from classroom video of the lesson similar to Viiri and Saari \parencite*{viiriTeacherTalkPatterns2006} under a different theoretical framework.
 
+\section{Quantitative analysis of teacher talk}
 A more quantitative approach was used by Helaakoski and Viiri \parencite{helaakoskiContentContentStructure2014} to analyse the content structure of teacher talk. They used a relatively large dataset of classroom video consisting of 45 German, 28 Swiss and 25 Finnish lessons about \enquote{Relation  between  electrical  energy  and  power.} The videos were manually transcribed and from the videos and transcripts links between concept categories were identified and represented as a connectivity matrix, which could be visualized as a network of concepts. From the same connectivity other metrics and measures were computed. Helaakoski and Viiri \parencite*{helaakoskiContentContentStructure2014} found that \enquote{More  specifically,  the  frequencies  of  physics  concepts  and  connections  between  them  correlated  significantly  with  learning  gains.} This result is in like with previous research, which stresses the importance of paying attention to teacher talk. \parencite{viiriTeacherTalkPatterns2006,scottTeachingScienceMeaningful2007,scottPedagogicalLinkMaking2011}
 
 %--------------------------------------------------------------------------------
@@ -102,15 +103,22 @@ A more quantitative approach was used by Helaakoski and Viiri \parencite{helaako
 \end{figure}
 %--------------------------------------------------------------------------------
 
-A common theme in analysing teacher talk is that the pipeline illustrated in figure \ref{fig:manualpipeline} is manually done. This is obviously a laborious manual task that is prone to errors and is impractical in day-to-day teacher education. While analysing dialogic interactions in teacher talk require interpretation of what the teacher meant \parencite{viiriTeacherTalkPatterns2006}, analysing content structure in teacher talk was less subjective and was not as heavily based on interpretation of what the teacher meant \parencite{helaakoskiContentContentStructure2014}. This makes the content structure of teacher talk a prime candidate for automatic analysis of physics instruction quality using NLP methods. 
+A common theme in analysing teacher talk is that the pipeline illustrated in figure \ref{fig:manualpipeline} is manually done. This is obviously a laborious manual task that is prone to errors and is impractical in day-to-day teacher education. While analysing dialogic interactions in teacher talk require interpretation of what the teacher meant \parencite{viiriTeacherTalkPatterns2006}, analysing content structure in teacher talk was less subjective and was not as heavily based on interpretation of what the teacher meant \parencite{helaakoskiContentContentStructure2014}.
 
+In summary, teacher talk is an important component of any lesson that hasn't been sufficiently researched, because of a lack of research methods. In particular new methods had to be developed to analyse the temporal aspect of teacher talk during the lesson. Improvements to methods to analyse teacher talk could lead to better feedback to student teachers.
 
 %--------------------------------------------------------------------------------
 
 
 \chapter{Teacher talk as data}
 \label{chap:speech}
-\section{Audio data}
+
+TODO: Introduction to the chapter
+
+\section{Natural language processing}
+
+\subsection{Automatic speech recognition}
+
 Automatic speech recognition (ASR), sometimes called speech to text, is a classification task, where the goal is to predict what was said from the audio signal of speech. Early ASR systems had an acoustic model which detected different sounds also known as phonemes to recognize numbers, some vowels and consonants for a single speaker \parencite{juangAutomaticSpeechRecognition2005}. Improvements in the acoustic model allowed for introduction of speaker-independent ASR \parencite{benzeghibaAutomaticSpeechRecognition2007,juangAutomaticSpeechRecognition2005}. The later addition of a language model based on statistical grammar and syntax helped more accurately predict the correct word based on what words previously appeared in the sentence \parencite{juangAutomaticSpeechRecognition2005}. Modern ASR systems utilize the fact that sentences are sequences of words and words are sequences of phonemes \parencite{bengioWordEmbeddingsSpeech2014}. 
 
 Sequence based models such as Hidden Markov Models (HMM) are most commonly used, but deep learning approaches using Recurrent Neural Networks (RNN) and Long Short-Term Memory (LSTM) networks gaining popularity for acoustic models, language models and end to end text-to-speech models \parencite{bengioWordEmbeddingsSpeech2014,enarviAutomaticSpeechRecognition2017}. Deep learning approach is more data-driven and relies on fewer assumptions, but instead requires more data for training \parencite{bengioWordEmbeddingsSpeech2014}. This might be impractical if training data is limited. Depending on the architecture, an ASR system might be capable of either transcription, keyword spotting or both \parencite{juangAutomaticSpeechRecognition2005,enarviAutomaticSpeechRecognition2017}.
@@ -121,20 +129,32 @@ ASR is a difficult machine learning task because of a large search space, large 
 
 
 
-\section{Text data}
+\subsection{Text processing}
+TODO: How is teacher talk is currently encoded directly from audio or through transcriptions and how that is not very reproducible, why automatic processing is needed
+
 TODO: NLP overview \parencite{silfverbergFinnPosOpensourceMorphological2016, kanervaTurkuNeuralParser2018}
 
 
-\section{Finnish language}
+\subsection{Finnish language}
 TODO: Conversational vs official Finnish
 Finnish language is particularly difficult for ASR because words are formed by concatenating smaller \parencite{enarviAutomaticSpeechRecognition2017}
+
+\section{Concept network analysis}
+
+\section{Time series analysis}
+A time series consists of a sequence of real numbers \parencite{yehMatrixProfileVI2017}. Data mining and knowledge discovery of time series data involves techniques such as motif discovery, discord discovery, clustering and segmentation \parencite{yehUniversalTimeSeries2018}.
+
+TODO Motif and discord
+
+TODO segmentation
 
 
 %--------------------------------------------------------------------------------
 
 
-\chapter{Methods}
+\chapter{QUIP project data}
 
+TODO Short introduction of the QUIP project
 
 \section{Dataset}
 
@@ -190,13 +210,24 @@ We then represent a pair of co-occurring physics concepts as nodes with the amou
 
 \section{Time series analysis}
 
-Temporal analysis of teacher talk is still problematic \parencite{lehesvuoriVisualizingCommunicationStructures2013}, which is why we also analyse the talk using time series analysis. For this we must first represent the teacher talk of the lesson as a time series, before computing a matrix profile for pattern recognition purposes.
+A time series consists of a sequence of real numbers \parencite{yehMatrixProfileVI2017}. Data mining and knowledge discovery of time series data involves techniques such as motif discovery, discord discovery, clustering and segmentation \parencite{yehUniversalTimeSeries2018}.
+
+TODO: Motif and discord explanations, segmentation explanation
 
 This is done by computing a keyword frequency time series for each lesson using a fixed window over the splits generated by the ASR system. We count the total amount of keywords and amount in each category in each window. Physics keywords categorized as physics \emph{concepts} such as \emph{power}, physics related \emph{objects} such as \emph{battery}, physics \emph{units} such as \emph{watt}, \emph{meta} words such as \emph{theory} or \emph{other} words such as \emph{write}.
 
 
-\chapter{Results and conclusions}
+\chapter{Results}
 
+\section{Concept networks}
+
+\begin{figure}
+  \includegraphics[width=\linewidth]{../figures/graph1.png}
+  \caption{Concept network obtained from teacher talk during a Finnish physics lesson on the topic of }
+  \label{fig:graph1}
+\end{figure}
+
+\section{Motif discovery}
 
 TODO:
 \chapter{Related work}
@@ -207,8 +238,17 @@ Fan et al. \parencite*{fanCourseMIRROREnhancingLarge2015} used NLP techniques to
 
 
 
-\chapter{Discussion}
+\chapter{Conclusions}
 
+
+
+TODO Limitations
+
+In addition to the ethics of data collection in a classroom setting and potential misuse, automatic processing of teacher talk could be used for teacher assessment which is not based in pedagogical theory. The methods described in this thesis are based on potentially useful patterns in the data and further confirmatory research is required to determine whether the patterns are indeed useful.
+
+TODO Further research
+
+TODO Acknowledgements
 Research is being done in collaboration with the Department of Teacher Education at University of Jyväskylä and Centro de Investigación Avanzada en Educación (CIAE) at University of Chile.
  
 \printbibliography
