@@ -8,3 +8,4 @@ pandas
 pylint
 matplotlib
 matrixprofile-ts
+scikit-learn

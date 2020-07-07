@@ -31,6 +31,6 @@ def test_transcript_keyword_freq():
     assert cf.transcript_keyword_freq(case1,keywords1,1)["freq_keywords"] == [2,2]
     assert cf.transcript_keyword_freq(case1,keywords1,2)["freq_keywords"] == [4]
 #%%
-def test_matrix_profile():
-    assert abs(cf.matrix_profile([1,2,3,4,5,6,7,8,9,1,2,3,11,12,13,14],
-            4)[0][0] - 4.21468485e-08) < 0.1
+#def test_matrix_profile():
+#p    assert abs(cf.matrix_profile([1,2,3,4,5,6,7,8,9,1,2,3,11,12,13,14],
+#            4)[0][0] - 4.21468485e-08) < 0.1

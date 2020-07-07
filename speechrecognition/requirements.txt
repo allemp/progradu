@@ -8,3 +8,4 @@ pylint
 matplotlib
 matrixprofile-ts
 stumpy
+scikit-learn

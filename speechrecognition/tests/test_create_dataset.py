@@ -40,3 +40,9 @@ def test_create_transcript():
 
     assert cd.create_transcript(case1, cd.nltk_stemmer) == result1
     assert cd.create_transcript(case2, cd.voikko_lemmatizer) == result2
+
+
+def test_parse_filename():
+    assert cd.parse_filename("t1_1.txt") == {"teacher": 1, "lesson": 1}
+    assert cd.parse_filename("t1_2.txt") == {"teacher": 1, "lesson": 2}
+    assert cd.parse_filename("t15_2.txt") == {"teacher": 15, "lesson": 2}

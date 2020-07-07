@@ -6,6 +6,7 @@ import argparse
 import json
 import numpy as np
 import libvoikko
+import re
 from nltk.stem.snowball import SnowballStemmer
 
 #%% Create root word using Snowball stemmer
@@ -28,6 +29,11 @@ def voikko_lemmatizer(words):
             pass
     
     return root_words
+
+#%% Parse the filename 
+def parse_filename(filename):
+    digits = re.findall(r'\d+', filename)
+    return {"teacher": int(digits[0]), "lesson": int(digits[1])}
 
 #%% Read a file from disk from the specified path
 
@@ -84,7 +90,7 @@ if __name__ == "__main__":
     elif args.type == "transcripts":
         transcripts = []
         for file in os.listdir(args.path):
-            transcripts.append(create_transcript(read_file(os.path.join(args.path, file)) , baseformers[args.baseformer]))
+            transcripts.append({**parse_filename(file),"transcript": create_transcript(read_file(os.path.join(args.path, file)) , baseformers[args.baseformer])})
         print(json.dumps(transcripts))
 
     else:
