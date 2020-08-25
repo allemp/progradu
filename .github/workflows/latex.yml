@@ -56,7 +56,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: gradu-${{ steps.vars.outputs.date }}-${{ steps.vars.outputs.sha8 }}
-          release_name: My Master's thesis (version ${{ steps.vars.outputs.date }})
+          release_name: My Masters thesis (version ${{ steps.vars.outputs.date }})
           draft: false
           prerelease: false
       - name: Upload pdf thesis
