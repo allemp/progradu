@@ -66,7 +66,7 @@
 
 \chapter{Introduction}
 
-\emph{Automatic speech recognition (ASR)} has gained interest in fields such as education, that are outside of usual domains of linguistics or computer science. This interest is sparked because of the increasing amount of audio speech data gathered in research activities such as observation or interviews. While speech-to-text ASR has been available for some time, further analysis of the text data in has remained a manual process especially in the domain of education. An important part of physics education is teaching students how to think like an expert and have deeper understanding of the physics concepts with monitoring and guidance of the instructor \parencite{wiemanTransformingPhysicsEducation2007}. Good physics instruction depends on the talk between the teacher and the students, which is called \emph{teacher talk} \parencite{scottTeachingScienceMeaningful2007}. Unfortunately teacher talk is not given the attention it deserves during teacher education \parencite{crespoPraisingCorrectingProspective2002,lehesvuoriDialogicTeachingScience2013}. 
+\emph{Automatic speech recognition (ASR)} has been one of the topics of interest in fields like computational linguistics and natural language processing, but more recently has expanded into more fields like education. This interest is sparked because of the increasing amount of audio speech data gathered in research activities such as observation or interviews. While speech-to-text ASR has been available for some time, further analysis of the text data in has remained a manual process especially in the domain of education. An important part of physics education is teaching students how to think like an expert and have deeper understanding of the physics concepts with monitoring and guidance of the instructor \parencite{wiemanTransformingPhysicsEducation2007}. Good physics instruction depends on the talk between the teacher and the students, which is called \emph{teacher talk} \parencite{scottTeachingScienceMeaningful2007}. Unfortunately teacher talk is not given the attention it deserves during teacher education \parencite{crespoPraisingCorrectingProspective2002,lehesvuoriDialogicTeachingScience2013}. 
 
 Speech as data is sequential and messy in nature and requires cleaning and preprocessing before it can be used. In the case of teacher talk, it is traditionally analysed manually by researchers, which is a subjective and laborious process that is difficult to reproduce. Lack of analysis methods for teacher talk have been identified and new methods to analyse and visualize teacher talk during a lesson have been developed over time \parencite{viiriTeacherTalkPatterns2006,lehesvuoriVisualizingCommunicationStructures2013}. However, these methods rely on researchers first manually transcribing and coding the data, which is still laborious and difficult to reproduce. This is impractical for both research and for use in the field to give teachers feedback during their teacher education. Speech-to-text ASR is a well researched topic with significant advances especially in languages without a lot of speakers such as Finnish \parencite{kurimoModelingUnderresourcedLanguages2017}. Further processing of the text data is domain and application specific and not well researched in the case of teacher talk in science education and is the topic of this thesis. 
 
@@ -124,10 +124,10 @@ In summary, teacher talk is an important component of any lesson that hasn't bee
 
 \section{Natural language processing}
 
-Natural language prcoessing as a field deals with applications of human language data, which is different from computational linguistics which focuses on studying human languages, but there is overlap and sharing of methods between the fields.
+Natural language processing as a field deals with applications of human language data, which is different from computational linguistics which focuses on studying human languages, but there is overlap and sharing of methods between the fields.
 
 \subsection{Automatic speech recognition}
-Automatic speech recognition (ASR) can be thought of as a subset of natural language processing. In fact, most ASR systems are speech-to-text, where any further processing is done with the text data. Speech might not always have clearly defined words and sentences, which shifts the focus from words to sounds called \emph{phonemes} and from sentences to word sequences called \emph{utterances}. Modeling conversational speech is especially difficult \parencite{kurimoModelingUnderresourcedLanguages2017}.
+Automatic speech recognition (ASR) can be thought of as a subset of natural language processing. In fact, most ASR systems are speech-to-text, where any further processing is done with the text data. Speech might not always have clearly defined words and sentences, which shifts the focus from words to sounds called \emph{phonemes} and from sentences to word sequences called \emph{utterances}. Modelling conversational speech is especially difficult \parencite{kurimoModelingUnderresourcedLanguages2017}.
 
 ASR is a classification task, where the goal is to predict what was said from the audio signal of speech. Early ASR systems had an acoustic model which detected phonemes to recognize numbers, some vowels and consonants for a single speaker \parencite{juangAutomaticSpeechRecognition2005}. Improvements in the acoustic model allowed for introduction of speaker-independent ASR \parencite{benzeghibaAutomaticSpeechRecognition2007,juangAutomaticSpeechRecognition2005}. The later addition of a language model based on statistical grammar and syntax helped more accurately predict the correct word based on what words previously appeared in the utterance \parencite{juangAutomaticSpeechRecognition2005}. Modern ASR systems utilize the fact that utterances are sequences of words and words are sequences of phonemes \parencite{bengioWordEmbeddingsSpeech2014}. 
 
@@ -154,8 +154,41 @@ Finnish language is particularly difficult for ASR because words are formed by c
 
 
 \chapter{Methods}
-
 %TODO Short introduction of the QUIP project
+
+
+\section{KDD process}
+
+According to Fayyaad et. al \parencite*{fayyadDataMiningKnowledge1996} traditional methods of manual analysis and interpretation rely on the person performing the analysis to be very familiar with the data and is a slow, expensive and highly subjective process. Even in the 90's they have noticed, that \enquote{manual data analysis is becoming completely impractical in many domains}. Because of the fast pace of accumulation of new data, they identified an urgent need for computational theories and tools to extract knowledge from data in at least a partially automatic way.
+
+To address this a new field called Knowledge Discovery in Databases was introduced, that combines the fields of expert systems, machine learning, intelligent databases, knowledge acquisition, case-based reasoning and statistics \parencite{piatetsky-shapiroKnowledgeDiscoveryReal1990}. Originally KDD referred to the interactive and iterative process of extracting useful knowledge from data with emphasis on that knowledge is the end product of a data-driven discovery \parencite{fayyadKnowledgeDiscoveryData1996}. Data mining was a particular step in the process \parencite{fayyadKnowledgeDiscoveryData1996}, but later data mining and KDD became synonymous \parencite{piatetsky-shapiroKnowledgeDiscoveryDatabases2000}. A formal definition provided by Fayaad et. al \parencite*{fayyadKnowledgeDiscoveryData1996} is as follows:
+\begin{displayquote}
+Knowledge Discovery in Databases is the non-trivial process of identifying valid, novel, potentially useful, and ultimately understandable patterns in data.
+\end{displayquote}
+
+% How is KDD different from regular data analysis? TODO
+
+% Importance of formulating the problem TODO
+
+% Requirements/importances of KDD TODO
+Found patterns should be novel, understandable, which are more subjective measures and valid on new data, which has more objective measures to evaluate them \parencite{fayyadKnowledgeDiscoveryData1996}. This evaluation is important, because knowledge discovery is based in statistics and patterns can be found even in random data \parencite{fayyadDataMiningKnowledge1996}.
+
+
+The KDD process can be broken down into nine steps with iterations and loops possible between any two steps \parencite{fayyadKDDProcessExtracting1996,fayyadKnowledgeDiscoveryData1996,fayyadDataMiningKnowledge1996}:
+
+\begin{enumerate}
+  \item Understanding the domain
+  \item Creating target dataset
+  \item Data cleaning and preprocessing
+  \item Data reduction and projection
+  \item Matching goals to data mining method
+  \item Exploratory data analysis
+  \item Data mining
+  \item Interpreting mined patterns
+  \item Acting on discovered knowledge
+\end{enumerate}
+
+% Steps that are the focus of this thesis: preprocessing, data reduction & projection TODO
 
 \section{Dataset}
 
@@ -179,6 +212,7 @@ The dataset consists of audio recordings of Finnish physics teachers in comprehe
 In addition to audio recordings from the teachers, the students were tested on the knowledge of the topic before and after the lesson and a list of physics keywords was obtained from a \enquote{FyKe 7-9 Fysiikka}\parencite{kangaskorteFyKeFysiikkaOPS2016} physics textbook glossary. The audio data was then automatically transcribed using AaltoASR in 5 second splits \parencite{hirsimakiImportanceHighOrderNGram2009} as shown in table ~\ref{table:transcript}. We will define a transcript as a \emph{document} and the full collection of transcripts as \emph{corpus} of documents.
 
 
+% Dataset quality evaluation criteria
 
 \section{Text Normalization}
 
@@ -200,6 +234,8 @@ In addition to audio recordings from the teachers, the students were tested on t
 
 First we apply text normalization techniques to the documents. First the documents are tokenized split by split into sequences of words using the NLTK tokenizer \parencite{birdNaturalLanguageProcessing2009}. Because of the agglutinative nature of Finnish, we then use the NLTK Snowball stemmer \parencite{birdNaturalLanguageProcessing2009} and the Voikko morphological analyser \parencite{pitkanenVoikkoFreeLinguistic2019}  for stemming and lemmatization. An example of the stems and lemmas obtained is shown in table ~\ref{table:stemmer}. We then process the physics keyword list in the same way. 
 
+% Model evaluation criteria
+
 \section{Bag-of-words}
 A bag-of-words model is a simple way to represent a document as a feature. The basic idea is that for each token in the document we count the number of times the token occurred and represent it as a feature. For example two documents consisting of the sentences \enquote{the, pen, is, in, the, bag} and \enquote{a, pen, is, mightier, than, a, sword} would be represented like in table \ref{table:counts}. Other variations include using \emph{term frequency (TF)}, where the token count is divided by the total amount of tokens in the document to reduce the impact of differences in document length or \emph{term frequency - inverse document frequency (TF-IDF)}, where the term frequency is multiplied by inverse document frequency to reduce the impact of uninteresting words that commonly occur in many documents. 
 
@@ -219,7 +255,11 @@ During experimentation we quickly noticed that it is necessary to reduce the amo
   \label{table:counts}
 \end{table}
 
-\section{Keyword co-occurrence}
+% Model evaluation criteria
+
+\section{Token co-occurrence}
+
+% Model evaluation criteria
 
 \section{Concept network analysis}
 
@@ -228,6 +268,8 @@ Expanding upon the idea of visualizing concept structure using conceptual networ
 We first compute a physics concept co-occurrence matrix for each text normalized lesson using an overlapping window over the splits produced by the ASR system. Since a non-overlapping window would not count two concepts occurring together but in different windows as co-occurring, we count the co-occurrences within the first half of the window and then add the co-occurrences between the two halves. This is done to avoid counting the same co-occurrence within a window twice due to the overlapping window.
 
 We then represent a pair of co-occurring physics concepts as nodes with the amount of co-occurrences as the weight for that edge. Using NetworkX \parencite{hagbergExploringNetworkStructure2008} we can visualize the lessons concept structure as a network of concepts as shown in figure %TODO.
+
+% Model evaluating criteria
 
 \section{Motif and discord discovery}
 There are two main approaches to representing the temporal aspect of a lesson. The first approach would be to engineer more features, for example instead of computing a mean for the entire lesson we would split the lesson into smaller pieces called \emph{bins} and compute a separate mean for each bin. The second approach would be to have a sequence of examples, each representing a piece of the lesson. Such a sequence consisting of real umbers is called a time series \parencite{yehMatrixProfileVI2017}. Data mining and knowledge discovery of time series data involves techniques such as \emph{motif} discovery, \emph{discord} discovery, and \emph{segmentation} \parencite{yehUniversalTimeSeries2018}.
@@ -244,9 +286,25 @@ The third way is to have each lesson as a separate dimension and compute a multi
 
 After the motif and discord discovery and semantic segmentation is completed, we visualize the matrix profile, CAC and the found patterns and interpret the local sequences. This interpretation phase is a manual process that relies on domain expertise and is necessary when using unsupervised techniques.
 
+% Model evaluation criteria
+
 \section{Cluster analysis}
 
+% Unsupervised technique, based on a similarity measure, types of similarity measure
+
+% Hierarchical clustering, AgglomerativeCLustering, Dendogram, linkage method
+
+% Model evaluation criteria: CLuster validation indices, interpretation of the clusters
+
+
 \section{Predictive modelling}
+
+According to Shmueli \parencite*{shmueliExplainPredict2010} predictive modelling is defined as \enquote{the process of applying a statistical model or data mining algorithm to data for the purpose of predicting new or future observations}. This is in contrast to explanatory modelling, where causality provided by the theory is tested using statistical methods \parencite{shmueliExplainPredict2010}. It is important to point out, that explanatory modelling relies on \emph{construct operationalization}, that is tying theoretical constructs to observable measurements, but the predictive modelling does not \parencite{shmueliExplainPredict2010}. In other words, explanatory modelling aims to extract information about how nature associates inputs to outputs, while predictive modelling aims to use inputs to predict outputs \parencite{breimanStatisticalModelingTwo2001}.
+% Supervised technique, example and label
+
+% Decision tree
+
+% Model evaluation criteria: validation, holdout set, k-fold, comparison to naive algorithms
 
 \chapter{Results}
 
@@ -260,29 +318,62 @@ After the motif and discord discovery and semantic segmentation is completed, we
   \label{fig:graph1}
 \end{figure}
 
-\section{Motif and discord discovery}
+\section{Matrix profile}
 
+% Example matrix profile and the found motifs, discords and segmentation using parameters X and Y TODO
+An example of a matrix profile of a lesson is shown in figure TODO.
+
+% Interpretation of the matrix profile motifs, discords and segmentation TODO
+
+% Example of the same matrix profile, but with parameters A and B TODO
+
+% Instability related to parameters and seemingly spurious patterns TODO
 
 \section{Cluster analysis}
 
+% Dendogram of the clusters, results of cluster validation indices TODO
+
+% Interpretation of clusters TODO
+
+% Example of dendogram and cluster validation indices with different parameters TODO
+
+% Bad quality of the clusters, low cluster validation score TODO
+
 \section{Predictive modelling}
 
-%TODO:
+% Chosen label and performance metric, results of the trained models using k-fold TODO
+
+% Example of a decision tree TODO
+
+% Bad model, comparison to naive random model TODO
+
 \chapter{Related work}
 
 Caballero et al. \parencite*{caballeroASRClassroomToday2017} applied ASR and NLP techniques to analyse teacher talk in Spanish and Finnish in a pilot study to determine the feasibility of the approach and maturity of modern ASR systems. Two teachers were equipped with microphones and concept networks were created and visualized by counting which physics concept keywords occurred together in the teacher's talk. We expanded upon this idea by using a larger dataset with more teachers, using alternative NLP methods such as lemmatization in addition to stemming, adding more representations of the data and including taking the temporal aspect of the lesson into account in the analysis and visualizations.
 
 Fan et al. \parencite*{fanCourseMIRROREnhancingLarge2015} used NLP techniques to improve interactions between the student and the instructor. They developed a pilot system to collect self-reflections from the students, summarize them using NLP and then show the summaries to the instructors through a graphical interface. We believe that a simple to use interface to show summaries is necessary for teachers and developed visualizations so that teachers can see the content structure of the entire lesson at a glance.
 
+% Find more related work TODO
 
+\chapter{Discussion}
+
+% partial success of word co-occurrence: network analysis
+% Failure of bag of words: matrix profiles, clustering and decision trees
+
+% interpretation of found patterns
+
+% Acting on discovered knowledge
+
+
+% Limitations TODO
+
+% Ethics and privacy
+In addition to the ethics of data collection in a classroom setting and potential misuse, automatic processing of teacher talk could be used for teacher assessment which is not based in pedagogical theory. The methods described in this thesis are based on potentially useful patterns in the data and further confirmatory research is required to determine whether the patterns are indeed useful.
 
 \chapter{Conclusions}
 
 
 
-%TODO Limitations
-
-In addition to the ethics of data collection in a classroom setting and potential misuse, automatic processing of teacher talk could be used for teacher assessment which is not based in pedagogical theory. The methods described in this thesis are based on potentially useful patterns in the data and further confirmatory research is required to determine whether the patterns are indeed useful.
 
 %TODO Further research
 

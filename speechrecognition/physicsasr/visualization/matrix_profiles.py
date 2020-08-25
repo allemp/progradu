@@ -23,8 +23,8 @@ transcripts = [[segment for transcript in dataset.transcripts for segment in tra
 
 keywords = dataset.keywords
 #%%
-for transcript in transcripts:
-    features = Features(transcript, keywords)
+for transcript in dataset.transcripts:
+    features = Features(transcript["transcript"], keywords, transcript["teacher"], transcript["lesson"])
     freqs = features.compute_keyword_freq(keyword_window)
     
     mp = features.compute_transcript_mp(keyword_window,m)
@@ -43,12 +43,12 @@ for transcript in transcripts:
 
     motifs_i, motifs_d = motifs.motifs(np.asarray(freqs["freq_keywords"], dtype=np.double), mp, max_motifs = 10)
 
-    motif1 = motifs_i[2][0]
-    motif2 = motifs_i[2][1]
+    #motif1 = motifs_i[2][0]
+    #motif2 = motifs_i[2][1]
 
 
-    print(freqs["freq_keywords"][(motif1-m):(motif1+m)])
-    print(transcript[((motif1 * keyword_window) - keyword_window + 1): (motif1 * keyword_window)])
+    #print(freqs["freq_keywords"][(motif1-m):(motif1+m)])
+    #print(transcript[((motif1 * keyword_window) - keyword_window + 1): (motif1 * keyword_window)])
 
-    print(freqs["freq_keywords"][(motif2-m):(motif2+m)])
-    print(transcript[((motif2 * keyword_window) - keyword_window + 1): (motif2 * keyword_window)])
+    #print(freqs["freq_keywords"][(motif2-m):(motif2+m)])
+    #print(transcript[((motif2 * keyword_window) - keyword_window + 1): (motif2 * keyword_window)])
