@@ -46,6 +46,10 @@ jobs:
           echo «::set-output name=sha8::$(echo ${GITHUB_SHA} | cut -c1-8)»
           
       - name: Download artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: gradu 
+      - name: Create Release 
         uses: actions/create-release@v1
         id: create_release
         env:
