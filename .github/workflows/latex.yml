@@ -32,4 +32,35 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: gradu
-        path: speechrecognition/reports/thesis/gradu.pdf 
+        path: speechrecognition/reports/thesis/gradu.pdf
+  deploy:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/master'
+    
+    needs: [build]
+    steps:
+      - name: Variables
+        id: vars
+        run: |
+          echo «::set-output name=date::$(date +'%Y-%m-%d')»
+          echo «::set-output name=sha8::$(echo ${GITHUB_SHA} | cut -c1-8)»
+          
+      - name: Download artifacts
+        uses: actions/create-release@v1
+        id: create_release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: my_doc-${{ steps.vars.outputs.date }}-${{ steps.vars.outputs.sha8 }}
+          release_name: My Master's thesis (version ${{ steps.vars.outputs.date }})
+          draft: false
+          prerelease: false
+      - name: Upload pdf thesis
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./gradu.pdf
+          asset_name: my_thesis.pdf
+          asset_content_type: application/pdf      
