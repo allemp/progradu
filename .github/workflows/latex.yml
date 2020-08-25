@@ -42,7 +42,6 @@ jobs:
       - name: Variables
         id: vars
         run: |
-          echo «::set-output name=date::$(date +'%Y-%m-%d')»
           echo «::set-output name=sha8::$(echo ${GITHUB_SHA} | cut -c1-8)»
           
       - name: Download artifacts
@@ -55,8 +54,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: gradu-${{ steps.vars.outputs.date }}-${{ steps.vars.outputs.sha8 }}
-          release_name: My Masters thesis (version ${{ steps.vars.outputs.date }})
+          tag_name: gradu-${{ steps.vars.outputs.sha8 }}
+          release_name: My Masters thesis (version ${{ steps.vars.outputs.sha8 }})
           draft: false
           prerelease: false
       - name: Upload pdf thesis
