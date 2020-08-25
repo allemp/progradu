@@ -21,6 +21,7 @@ htmlcov/
 *.bbl
 *.aux
 *.dvi
+*.pdf
 .ipynb_checkpoints/
 __pycache__/
 .vscode/
