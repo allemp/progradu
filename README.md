@@ -1,5 +1,5 @@
 # Masters thesis for Univeristy of Jyväskylä
-The code is found in [speechrecognition/src](speechrecognition/src), exploratory notebooks in [speechrecognition/notebooks](speechrecognition/notebooks) and masters thesis PDF is found in [speechrecognition/reports/thesis/gradu/gradu.pdf](speechrecognition/reports/thesis/gradu/gradu.pdf).
+The code is found in [speechrecognition/src](speechrecognition/src), exploratory notebooks in [speechrecognition/notebooks](speechrecognition/notebooks) and masters thesis PDF is found in [speechrecognition/reports/thesis/gradu.pdf](speechrecognition/reports/thesis/gradu.pdf).
 
 Makefile includes the code necessary to build a docker container and run the code.
 
