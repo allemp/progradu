@@ -54,7 +54,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: gradu-${{ steps.vars.outputs.sha8 }}
+          tag_name: test
           release_name: My Masters thesis (version ${{ steps.vars.outputs.sha8 }})
           draft: false
           prerelease: false
