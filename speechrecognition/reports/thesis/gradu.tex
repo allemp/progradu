@@ -55,7 +55,8 @@
 \item[NLTK] Natural Language ToolKit
 \item[TF] Term Frequency
 \item[TF-IDF] Term Frequency - Inverse Document Frequency 
-\item[CAC] Corrected Arc Curve 
+\item[CAC] Corrected Arc Curve
+\item[QuIP] Quality of Instruction in Physics 
 \end{thetermlist}
 
 \mainmatter
@@ -87,7 +88,7 @@ The outcomes of this thesis are two contributions in analysing teacher talk:
 \chapter{Physics instruction quality}
 \label{chap:quip}
 
-%TODO introduction to the chapter
+TODO introduction to the chapter
 
 \section{Teacher talk}
 The quality of physics instruction has been at the centre of discussion, where traditional teaching methods have been criticized as inefficient at creating experts capable of thinking like physicists \parencite{wiemanTransformingPhysicsEducation2007}. The interaction between the teacher and the students is called \emph{teacher talk} and is a big part of all physics lessons, which is often taken for granted \parencite{scottTeachingScienceMeaningful2007}. Teacher talk is often not sufficiently addressed during teacher education and could be explained by the scarcity of available methods \parencite{lehesvuoriDialogicTeachingScience2013,viiriTeacherTalkPatterns2006, crespoPraisingCorrectingProspective2002}.
@@ -112,7 +113,7 @@ A more quantitative approach was used by Helaakoski and Viiri \parencite{helaako
 \end{figure}
 %--------------------------------------------------------------------------------
 
-In summary, teacher talk is an important component of any lesson that hasn't been sufficiently researched, because of a lack of good research methods. Specifically analysis of the temporal aspect of teacher talk during the lesson is interesting, but has few methods to analyse it. Improved methods to analyse teacher talk could lead to better feedback to student teachers and more opportunities for researching the interactions of the teacher during a lesson.
+In summary, teacher talk is an important component of any lesson and it has not been sufficiently researched, because of a lack of good research methods. Specifically analysis of the temporal aspect of teacher talk during the lesson is interesting, but has few methods to analyse it. Improved methods to analyse teacher talk could lead to better feedback to student teachers and more opportunities for researching the interactions of the teacher during a lesson.
 
 %--------------------------------------------------------------------------------
 
@@ -120,7 +121,7 @@ In summary, teacher talk is an important component of any lesson that hasn't bee
 \chapter{Teacher talk as data}
 \label{chap:speech}
 
-%TODO: Introduction to the chapter
+TODO: Introduction to the chapter
 
 \section{Natural language processing}
 
@@ -142,35 +143,68 @@ ASR is a difficult machine learning task because of a large search space, large 
 \subsection{Text processing}
 
 
-%TODO: NLP overview \parencite{silfverbergFinnPosOpensourceMorphological2016, kanervaTurkuNeuralParser2018}
+TODO: NLP overview \parencite{silfverbergFinnPosOpensourceMorphological2016,kanervaTurkuNeuralParser2018}
 
-%TODO: Definitions of concepts such as term, keyword, document, corpus and text
+TODO: Definitions of concepts such as term, keyword, document, corpus and text
 
 \subsection{Finnish language}
-%TODO: Conversational vs official Finnish
-Finnish language is particularly difficult for ASR because words are formed by concatenating smaller \parencite{enarviAutomaticSpeechRecognition2017}
+
+TODO: Conversational vs official Finnish
+
+TODO Finnish language is particularly difficult for ASR because words are formed by concatenating smaller \parencite{enarviModelingConversationalFinnish2018}
 
 %--------------------------------------------------------------------------------
 
 
 \chapter{Methods}
-%TODO Short introduction of the QUIP project
+
+According to Fayyaad et. al \parencite*{fayyadDataMiningKnowledge1996} traditional methods of manual analysis and interpretation rely on the person performing the analysis to be very familiar with the data and is a slow, expensive and highly subjective process. Even in the 90's they have noticed, that \enquote{manual data analysis is becoming completely impractical in many domains}. Because of the fast pace of accumulation of new data, they identified an urgent need for computational theories and tools to extract knowledge from data in at least a partially automatic way.
+
+Quality of Instruction in Physics (QuIP) project \parencite{fischerQualityInstructionPhysics2014} used this type of manual data analysis process to extract patterns of instruction and find surface and deep structures in instructional quality in physics. The main research questions in the QuIP study were the following:
+
+\begin{enumerate}
+ \item What are the typical patterns of physics instruction?
+ \item Under what conditions are these patterns successful with respect to student learning, interest and motivation?
+\end{enumerate}
+
+Answering the first research question required finding patterns using manual data analysis, because of unavailability of automatic methods in teacher talk research. This thesis uses the audio data collected from teachers during the QuIP project to automatically extract patterns physics instruction using the Knowledge Discovery in Databases (KDD) process.
+
+\section{Dataset}
+
+%--------------------------------------------------------------------------------
+\begin{table}[]
+  \begin{tabular}{ | l | l | l |}
+  \hline
+  \textbf{Start} & \textbf{End}  & \textbf{Text} \\ \hline
+  10.0 & 15.0 & hehkulamppua kakstoista tunteesta kirjottaas taas että miten tuo laske\\ \hline
+  15.0 & 20.0 & virtapiirejä virtapiirejä rakettien kans vaikka kuinka paljon tähän\\
+  \hline
+  \end{tabular}
+  \caption{An example of 5 second segments obtained from an ASR system}
+  \label{table:transcript}
+\end{table}
+%--------------------------------------------------------------------------------
+
+The dataset consists of audio recordings of Finnish physics teachers in comprehensive schools collected during the Quality of Physics Instruction study \parencite{fischerQualityInstructionPhysics2014,helaakoskiContentContentStructure2014}. Helaakoski and Viiri \parencite*{helaakoskiContentContentStructure2014} used microphones attached to 25 physics teachers to record lessons on the topic of \enquote{relation between electrical energy and power}. Of the 25 teachers, 22 taught their topic during two 45 min lessons and 3 teachers taught their topic during a 90 minute double lesson. 
+
+In addition to audio recordings from the teachers, the students were tested on the knowledge of the topic before and after the lesson and a list of physics keywords was obtained from a \enquote{FyKe 7-9 Fysiikka}\parencite{kangaskorteFyKeFysiikkaOPS2016} physics textbook glossary. The audio data was then automatically transcribed using AaltoASR into 5 second segments \parencite{hirsimakiImportanceHighOrderNGram2009} as shown in table ~\ref{table:transcript}.
+
+
+TODO Dataset quality evaluation criteria
+
 
 
 \section{KDD process}
 
-According to Fayyaad et. al \parencite*{fayyadDataMiningKnowledge1996} traditional methods of manual analysis and interpretation rely on the person performing the analysis to be very familiar with the data and is a slow, expensive and highly subjective process. Even in the 90's they have noticed, that \enquote{manual data analysis is becoming completely impractical in many domains}. Because of the fast pace of accumulation of new data, they identified an urgent need for computational theories and tools to extract knowledge from data in at least a partially automatic way.
-
-To address this a new field called Knowledge Discovery in Databases was introduced, that combines the fields of expert systems, machine learning, intelligent databases, knowledge acquisition, case-based reasoning and statistics \parencite{piatetsky-shapiroKnowledgeDiscoveryReal1990}. Originally KDD referred to the interactive and iterative process of extracting useful knowledge from data with emphasis on that knowledge is the end product of a data-driven discovery \parencite{fayyadKnowledgeDiscoveryData1996}. Data mining was a particular step in the process \parencite{fayyadKnowledgeDiscoveryData1996}, but later data mining and KDD became synonymous \parencite{piatetsky-shapiroKnowledgeDiscoveryDatabases2000}. A formal definition provided by Fayaad et. al \parencite*{fayyadKnowledgeDiscoveryData1996} is as follows:
+To extract knowledge in an automatic way a new field called Knowledge Discovery in Databases (KDD) was introduced, that combines the fields of expert systems, machine learning, intelligent databases, knowledge acquisition, case-based reasoning and statistics \parencite{piatetsky-shapiroKnowledgeDiscoveryReal1990}. Originally KDD referred to the interactive and iterative process of extracting useful knowledge from data with emphasis on that knowledge is the end product of a data-driven discovery \parencite{fayyadKnowledgeDiscoveryData1996}. Data mining was a particular step in the process \parencite{fayyadKnowledgeDiscoveryData1996}, but later data mining and KDD became synonymous \parencite{piatetsky-shapiroKnowledgeDiscoveryDatabases2000}. A formal definition provided by Fayaad et. al \parencite*{fayyadKnowledgeDiscoveryData1996} is as follows:
 \begin{displayquote}
 Knowledge Discovery in Databases is the non-trivial process of identifying valid, novel, potentially useful, and ultimately understandable patterns in data.
 \end{displayquote}
 
-% How is KDD different from regular data analysis? TODO
+TODO How is KDD different from regular data analysis?
 
-% Importance of formulating the problem TODO
+TODO Importance of formulating the problem
 
-% Requirements/importances of KDD TODO
 Found patterns should be novel, understandable, which are more subjective measures and valid on new data, which has more objective measures to evaluate them \parencite{fayyadKnowledgeDiscoveryData1996}. This evaluation is important, because knowledge discovery is based in statistics and patterns can be found even in random data \parencite{fayyadDataMiningKnowledge1996}.
 
 
@@ -188,31 +222,9 @@ The KDD process can be broken down into nine steps with iterations and loops pos
   \item Acting on discovered knowledge
 \end{enumerate}
 
-% Steps that are the focus of this thesis: preprocessing, data reduction & projection TODO
-
-\section{Dataset}
-
-%--------------------------------------------------------------------------------
-\begin{table}[]
-  \begin{tabular}{ | l | l | l |}
-  \hline
-  \textbf{Start} & \textbf{End}  & \textbf{Text} \\ \hline
-  10.0 & 15.0 & hehkulamppua kakstoista tunteesta kirjottaas taas että miten tuo laske\\ \hline
-  15.0 & 20.0 & virtapiirejä virtapiirejä rakettien kans vaikka kuinka paljon tähän\\
-  \hline
-  \end{tabular}
-  \caption{The sometimes inaccurate transcript consists of start and end times of the split and the utterance spoken by the teacher during that split.}
-  \label{table:transcript}
-\end{table}
-%--------------------------------------------------------------------------------
+TODO Steps that are the focus of this thesis: preprocessing, data reduction \& projection 
 
 
-The dataset consists of audio recordings of Finnish physics teachers in comprehensive schools collected during the Quality of Physics Instruction study \parencite{fischerQualityInstructionPhysics2014,helaakoskiContentContentStructure2014}. Helaakoski and Viiri \parencite*{helaakoskiContentContentStructure2014} used microphones attached to 25 physics teachers to record lessons on the topic of \enquote{Relation between electrical energy and power}. Of the 25 teachers, 22 taught their topic in two 45 min lessons and 3 teachers taught their topic during a 90 minute double lesson. 
-
-In addition to audio recordings from the teachers, the students were tested on the knowledge of the topic before and after the lesson and a list of physics keywords was obtained from a \enquote{FyKe 7-9 Fysiikka}\parencite{kangaskorteFyKeFysiikkaOPS2016} physics textbook glossary. The audio data was then automatically transcribed using AaltoASR in 5 second splits \parencite{hirsimakiImportanceHighOrderNGram2009} as shown in table ~\ref{table:transcript}. We will define a transcript as a \emph{document} and the full collection of transcripts as \emph{corpus} of documents.
-
-
-% Dataset quality evaluation criteria
 
 \section{Text Normalization}
 
@@ -227,21 +239,25 @@ In addition to audio recordings from the teachers, the students were tested on t
   virtapiirejä & virtapiir & virtapiiri & electric circuits\\
   \hline
   \end{tabular}
-  \caption{Both the Snowball stem and the Voikko lemma have problems with synonyms: the word "current" \emph{virtaa} is confused with the word "to flow" \emph{virrata} when lemma \emph{virta} was expected.}
+  \caption{An example of a stemming and lemmatization error with variations of the word "current"}
   \label{table:stemmer}
 \end{table}
 %--------------------------------------------------------------------------------
 
-First we apply text normalization techniques to the documents. First the documents are tokenized split by split into sequences of words using the NLTK tokenizer \parencite{birdNaturalLanguageProcessing2009}. Because of the agglutinative nature of Finnish, we then use the NLTK Snowball stemmer \parencite{birdNaturalLanguageProcessing2009} and the Voikko morphological analyser \parencite{pitkanenVoikkoFreeLinguistic2019}  for stemming and lemmatization. An example of the stems and lemmas obtained is shown in table ~\ref{table:stemmer}. We then process the physics keyword list in the same way. 
+First we apply text normalization techniques to the documents. First the documents are tokenized split by split into sequences of words using the NLTK tokenizer \parencite{birdNaturalLanguageProcessing2009}. Because of the agglutinative nature of Finnish, we then use the NLTK Snowball stemmer \parencite{birdNaturalLanguageProcessing2009} and the Voikko morphological analyser \parencite{pitkanenVoikkoFreeLinguistic2019}  for stemming and lemmatization. We then process the physics keyword list in the same way. 
 
-% Model evaluation criteria
+Stemming relies on an algorithm to remove suffixes and prefixes to get the same stem from slightly different words that have roughly same meaning such as \emph{present} and \emph{presented}. On the other hand, lemmatization relies on a dictionary of known variations of the word and can handle cases problematic for a stemmer, when the spelling of the word is different between variations such as \emph{drink} and \emph{drank}. Stemming is a faster and simpler approach compared to lemmatization \parencite{floresAssessingImpactStemming2016}. Neither stemming or lemmatization works in cases, when a variation of the word might have different options for the base word, an example of which is shown in table ~\ref{table:stemmer}.
+
+According to Flores and Moreira \parencite*{floresAssessingImpactStemming2016}, stemming accuracy did not improve information retrieval in English, but did improve in languages such as Portuguese, Spanish and French. Stemmers can be evaluated intrinsically, which is evaluating only the stemming system or extrinsically, which is evaluating the effect of the stemmer on the entire application \parencite{floresAssessingImpactStemming2016}. 
+
+During exploratory analysis of the dataset intrinsic evaluation of the stemmer using the multiple edit distance metrics provided by NLTK \parencite{birdNaturalLanguageProcessing2009} found that stemming does not work well with Finnish, because of the large amount of word variations. Despite this we would like to evaluate the effects of both the stemming and the lemmatization approach on the entire system using extrinsic evaluation. In other words, we compare the end results of the entire pipeline with stemming, lemmatization and doing nothing.
 
 \section{Bag-of-words}
-A bag-of-words model is a simple way to represent a document as a feature. The basic idea is that for each token in the document we count the number of times the token occurred and represent it as a feature. For example two documents consisting of the sentences \enquote{the, pen, is, in, the, bag} and \enquote{a, pen, is, mightier, than, a, sword} would be represented like in table \ref{table:counts}. Other variations include using \emph{term frequency (TF)}, where the token count is divided by the total amount of tokens in the document to reduce the impact of differences in document length or \emph{term frequency - inverse document frequency (TF-IDF)}, where the term frequency is multiplied by inverse document frequency to reduce the impact of uninteresting words that commonly occur in many documents. 
+A bag-of-words model is a simple way to represent a document as a feature, where the position of the words is ignored \parencite{jurafskySpeechLanguageProcessing2019}. The basic idea is that for each token in the document we count the number of times the token occurred and represent it as a feature. For example two documents consisting of the sentences \enquote{the, pen, is, in, the, bag} and \enquote{a, pen, is, mightier, than, a, sword} would be represented like in table \ref{table:counts}. Other variations include using \emph{term frequency (TF)}, where the token count is divided by the total amount of tokens in the document to reduce the impact of differences in document length or \emph{term frequency - inverse document frequency (TF-IDF)}, where the term frequency is multiplied by inverse document frequency to reduce the impact of uninteresting words that commonly occur in many documents \parencite{leskovec2020mining}.
 
-Bag of words models create very large feature vectors with as many features as there are unique tokens in the corpus. With a large enough vocabulary the data is incredibly sparse with most of the tokens occurring zero times in a given document. This sparsity of the data can create problems further in the analysis pipeline, especially if there are few documents. To decrease the sparsity, we can combine the features into bins. A common technique is to combine the very rare tokens into an \enquote{other} feature and to remove very common tokens called \emph{stop words} that do not contain a lot of information such as \enquote{is, a , the, and, where}.
+Bag of words models create very large feature vectors with as many features as there are unique tokens in the corpus. With a large enough vocabulary the data is incredibly sparse with most of the tokens occurring zero times in a given document. This sparsity of the data can create problems further in the analysis pipeline due to the high dimensionality, especially if there are few documents \parencite{verleysenCurseDimensionalityData2005}. To decrease the sparsity, we can combine the features into bins and cutting the long tail \parencite{leskovec2020mining,jurafskySpeechLanguageProcessing2019}. A common technique is to combine the very rare tokens into an \enquote{other} feature and to remove very common tokens called \emph{stop words} that do not contain a lot of information such as \enquote{is, a, the, and, where} \parencite{jurafskySpeechLanguageProcessing2019}.
 
-During experimentation we quickly noticed that it is necessary to reduce the amount of features. To do this we focus on the keyword list and combine tokens outside of the keyword list into an \emph{other} feature. This leaves us with a few hundred features instead of thousands of features. To reduce the amount of features even more, we bin the keywords into the following categories with the help of a physics expert: concepts, objects, units and meta keywords.
+During exploratory analysis we quickly noticed that it is necessary to reduce the amount of features. To do this we focus on the keyword list and combine tokens outside of the keyword list into an \emph{other} feature. This leaves us with a few hundred features instead of thousands of features. To reduce the amount of features even more, we bin the keywords into the following categories with the help of a physics expert: concepts, objects, units and meta keywords. Since some teachers are expected to talk more than others, we apply the TF technique by dividing the counts of keywords spoken by the total amount of words spoken by the teacher.
 
 \begin{table}[]
   \begin{tabular}{ | l | l | l | l | l | l | l | l | l | l |}
@@ -255,11 +271,11 @@ During experimentation we quickly noticed that it is necessary to reduce the amo
   \label{table:counts}
 \end{table}
 
-% Model evaluation criteria
-
+To evaluate this type of feature engineering, we use the same approach as in the extrinsic evaluation of the stemming and lemmatization during text normalization.
 \section{Token co-occurrence}
-
-% Model evaluation criteria
+TODO Describe token co-occurrence \parencite{jurafskySpeechLanguageProcessing2019, bullinariaExtractingSemanticRepresentations2007}
+TODO Describe weighted co-occurrence
+TODO Model evaluation criteria
 
 \section{Concept network analysis}
 
@@ -269,7 +285,7 @@ We first compute a physics concept co-occurrence matrix for each text normalized
 
 We then represent a pair of co-occurring physics concepts as nodes with the amount of co-occurrences as the weight for that edge. Using NetworkX \parencite{hagbergExploringNetworkStructure2008} we can visualize the lessons concept structure as a network of concepts as shown in figure %TODO.
 
-% Model evaluating criteria
+TODO Model evaluating criteria
 
 \section{Motif and discord discovery}
 There are two main approaches to representing the temporal aspect of a lesson. The first approach would be to engineer more features, for example instead of computing a mean for the entire lesson we would split the lesson into smaller pieces called \emph{bins} and compute a separate mean for each bin. The second approach would be to have a sequence of examples, each representing a piece of the lesson. Such a sequence consisting of real umbers is called a time series \parencite{yehMatrixProfileVI2017}. Data mining and knowledge discovery of time series data involves techniques such as \emph{motif} discovery, \emph{discord} discovery, and \emph{segmentation} \parencite{yehUniversalTimeSeries2018}.
@@ -286,25 +302,27 @@ The third way is to have each lesson as a separate dimension and compute a multi
 
 After the motif and discord discovery and semantic segmentation is completed, we visualize the matrix profile, CAC and the found patterns and interpret the local sequences. This interpretation phase is a manual process that relies on domain expertise and is necessary when using unsupervised techniques.
 
-% Model evaluation criteria
+TODO Model evaluation criteria
 
 \section{Cluster analysis}
 
-% Unsupervised technique, based on a similarity measure, types of similarity measure
+TODO Unsupervised technique, based on a distance measure, types of distance measures, curse of dimensionality
 
-% Hierarchical clustering, AgglomerativeCLustering, Dendogram, linkage method
+TODO Hierarchical clustering, AgglomerativeCLustering, Dendogram, linkage method
 
-% Model evaluation criteria: CLuster validation indices, interpretation of the clusters
+TODO Model evaluation criteria: CLuster validation indices, interpretation of the clusters
 
 
 \section{Predictive modelling}
 
 According to Shmueli \parencite*{shmueliExplainPredict2010} predictive modelling is defined as \enquote{the process of applying a statistical model or data mining algorithm to data for the purpose of predicting new or future observations}. This is in contrast to explanatory modelling, where causality provided by the theory is tested using statistical methods \parencite{shmueliExplainPredict2010}. It is important to point out, that explanatory modelling relies on \emph{construct operationalization}, that is tying theoretical constructs to observable measurements, but the predictive modelling does not \parencite{shmueliExplainPredict2010}. In other words, explanatory modelling aims to extract information about how nature associates inputs to outputs, while predictive modelling aims to use inputs to predict outputs \parencite{breimanStatisticalModelingTwo2001}.
-% Supervised technique, example and label
+TODO Supervised technique, example and label
 
-% Decision tree
+TODO Decision tree
 
-% Model evaluation criteria: validation, holdout set, k-fold, comparison to naive algorithms
+TODO Model evaluation criteria: validation, holdout set, k-fold, comparison to naive algorithms
+
+\section{Evaluation and interpretation}
 
 \chapter{Results}
 
@@ -320,32 +338,45 @@ According to Shmueli \parencite*{shmueliExplainPredict2010} predictive modelling
 
 \section{Matrix profile}
 
-% Example matrix profile and the found motifs, discords and segmentation using parameters X and Y TODO
-An example of a matrix profile of a lesson is shown in figure TODO.
+TODO Example matrix profile and the found motifs, discords and segmentation
 
-% Interpretation of the matrix profile motifs, discords and segmentation TODO
+TODO Interpretation of the matrix profile motifs, discords and segmentation 
 
-% Example of the same matrix profile, but with parameters A and B TODO
-
-% Instability related to parameters and seemingly spurious patterns TODO
+TODO Instability related to parameters and seemingly spurious patterns
 
 \section{Cluster analysis}
 
-% Dendogram of the clusters, results of cluster validation indices TODO
+TODO Dendogram of the clusters, results of cluster validation indices
 
-% Interpretation of clusters TODO
+TODO Interpretation of clusters TODO
 
-% Example of dendogram and cluster validation indices with different parameters TODO
-
-% Bad quality of the clusters, low cluster validation score TODO
+TODO Bad quality of the clusters, low cluster validation score
 
 \section{Predictive modelling}
 
-% Chosen label and performance metric, results of the trained models using k-fold TODO
+TODO Chosen label and performance metric, results of the trained models using k-fold TODO
 
-% Example of a decision tree TODO
+TODO Example of a decision tree
 
-% Bad model, comparison to naive random model TODO
+\begin{figure}
+  \includegraphics[width=\linewidth]{../figures/decisiontree.png}
+  \caption{The decision tree obtained when predicting whether it is the beginning, the middle or the end of the lesson}
+  \label{fig:decisiontree}
+\end{figure}
+
+\begin{table}[]
+  \begin{tabular}{ | l | l | l | l | l |}
+    \hline
+    \textbf{Method} &  \textbf{Train accuracy} &  \textbf{Test accuracy}\\ \hline
+      Decision tree & NA & NA \\
+      Random classifier & NA & NA\\
+    \hline
+  \end{tabular}
+  \caption{Performance comparison of different predictive methods}
+  \label{table:predictperf}
+\end{table}
+
+Performance of the decision tree model compared to a classifier that picks a class at random on previously unseen data using 10-fold validation can be seen in table ~\ref{table:predictperf}. The performance is very similar to a random classifier, which means that the model could not extract any useful patterns from the data. 
 
 \chapter{Related work}
 
@@ -353,31 +384,33 @@ Caballero et al. \parencite*{caballeroASRClassroomToday2017} applied ASR and NLP
 
 Fan et al. \parencite*{fanCourseMIRROREnhancingLarge2015} used NLP techniques to improve interactions between the student and the instructor. They developed a pilot system to collect self-reflections from the students, summarize them using NLP and then show the summaries to the instructors through a graphical interface. We believe that a simple to use interface to show summaries is necessary for teachers and developed visualizations so that teachers can see the content structure of the entire lesson at a glance.
 
-% Find more related work TODO
+TODO Find more related work
 
 \chapter{Discussion}
 
-% partial success of word co-occurrence: network analysis
-% Failure of bag of words: matrix profiles, clustering and decision trees
+TODO partial success of token co-occurrence: network analysis
+TODO Failure of bag of words: matrix profiles, clustering and decision trees
 
-% interpretation of found patterns
+TODO interpretation of found patterns
 
-% Acting on discovered knowledge
+TODO Acting on discovered knowledge
 
 
-% Limitations TODO
+TODO Limitations
 
-% Ethics and privacy
-In addition to the ethics of data collection in a classroom setting and potential misuse, automatic processing of teacher talk could be used for teacher assessment which is not based in pedagogical theory. The methods described in this thesis are based on potentially useful patterns in the data and further confirmatory research is required to determine whether the patterns are indeed useful.
+TODO Ethics and privacy
+In addition to the ethics of data collection in a classroom setting and potential misuse, automatic processing of teacher talk could be used for teacher assessment that is not based in pedagogical theory. The methods described in this thesis are based on potentially useful patterns in the data and further confirmatory research is required to determine whether the patterns are indeed useful and how they align with pedagogical theory.
 
 \chapter{Conclusions}
 
 
 
 
-%TODO Further research
+TODO Further research
 
-%TODO Acknowledgements
+
+
+TODO Acknowledgements
 Research was done in collaboration with the Department of Teacher Education at University of Jyväskylä and Centro de Investigación Avanzada en Educación (CIAE) at University of Chile.
  
 \printbibliography
